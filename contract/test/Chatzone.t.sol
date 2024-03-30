@@ -38,10 +38,10 @@ contract ENServiceTest is Test {
         ensContract.createAccount("abcdefghijka", "ify.dev");
 
         switchSigner(C);
-        chatzoneContract.sendMessage("hello Ify",  "ify.dev");
+        chatzoneContract.sendMessage(C, "hello Ify",  "ify.dev");
 
         switchSigner(D);
-        chatzoneContract.sendMessage("hello kels",  "kels.dev");
+        chatzoneContract.sendMessage(D, "hello kels",  "kels.dev");
         
 
         uint msgLengthAfter = chatzoneContract.getCountOfMsg().length;
@@ -62,7 +62,7 @@ contract ENServiceTest is Test {
 
         emit MessageSent(C, D, "hello Ify");
 
-        chatzoneContract.sendMessage("hello Ify",  "ify.dev");
+        chatzoneContract.sendMessage(C, "hello Ify",  "ify.dev");
         
     }
 
@@ -73,10 +73,10 @@ contract ENServiceTest is Test {
         ensContract.createAccount("abcdefghijka", "ify.dev");
 
         switchSigner(C);
-        chatzoneContract.sendMessage("hello Ify",  "ify.dev");
+        chatzoneContract.sendMessage(C, "hello Ify",  "ify.dev");
 
         switchSigner(D);
-        chatzoneContract.sendMessage("hello kels",  "kels.dev");
+        chatzoneContract.sendMessage(D, "hello kels",  "kels.dev");
 
         uint num = chatzoneContract.getMessagesBetweenUsers("ify.dev", "kels.dev").length;
 

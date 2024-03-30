@@ -21,13 +21,13 @@ contract Chatzone {
         ensContract = IENService(_ensAddress);
     }
 
-    function sendMessage(string calldata _msg, string calldata _to) external {
+    function sendMessage(address _from, string calldata _msg, string calldata _to) external {
         address _addr = ensContract.getAddressFromName(_to);
-        msgCount[msg.sender] += 1;
+        msgCount[_from] += 1;
         msgCount[_addr] += 1;
-        messages.push(Message({from: msg.sender, to: _addr, message: _msg}));
+        messages.push(Message({from: _from, to: _addr, message: _msg}));
 
-        emit MessageSent(msg.sender, _addr, _msg);
+        emit MessageSent(_from, _addr, _msg);
     }
 
     function getUserMessages() external view returns (Message[] memory) {
