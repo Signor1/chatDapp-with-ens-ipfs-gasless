@@ -27,10 +27,6 @@ const useCreateUser = (username: string, url: string) => {
 
     const contract = getENSContract(signer);
 
-    const toastId = toast.loading("Processing registration", {
-      position: "top-right",
-    });
-
     try {
       const transaction = await contract.createAccount(url, username);
 
@@ -50,16 +46,12 @@ const useCreateUser = (username: string, url: string) => {
       toast.error("account creation failed !", {
         position: "top-right",
       });
-
-      toast.dismiss(toastId);
     } catch (error: any) {
       // console.error("error: ", error);
       navigate("/signup");
       toast.error(`${error.message.slice(0, 20)}...`, {
         position: "top-right",
       });
-
-      toast.dismiss(toastId);
     }
   }, [username, url, chainId, walletProvider, navigate]);
 };
