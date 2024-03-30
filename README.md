@@ -2,7 +2,7 @@
 
 Welcome to the Decentralized Chat DApp branded `Chatzone`! This project aims to create a decentralized chat application using Ethereum blockchain and IPFS for secure profile image storage. Below you'll find information on the project structure, setup instructions, and how to contribute.
 
-![Decentralized Chat DApp](https://github.com/your-username/your-repository/blob/main/assets/chat-app-screenshot.png)
+![Decentralized Chat DApp](https://github.com/Signor1/chatDapp-with-ens-ipfs-gasless/blob/68515becd36f881687d57035f167ea535e0093ee/Screenshot.png)
 
 
 ## Table of Contents
