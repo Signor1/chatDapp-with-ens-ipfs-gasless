@@ -30,7 +30,7 @@ async function sendMessage(data) {
       wallet
     );
 
-    const tx = await contract.sendMessage(data.from, data.message, data.to);
+    const tx = await contract.sendMessage(data.from, data.msg, data.to);
     const receipt = await tx.wait();
     if (receipt.status) {
       return { success: true, tx, message: "Message sent" };
@@ -57,7 +57,7 @@ app.post("/forward-message", async (req, res) => {
   const signerAddress = verifyMessageWithEthers(
     JSON.stringify({
       from: data.from,
-      message: data.message,
+      msg: data.msg,
       to: data.to,
     }),
     data.signature
