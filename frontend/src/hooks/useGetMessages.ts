@@ -38,7 +38,7 @@ const useGetMessages = (from: string, to: string) => {
       topics: [ethers.id("MessageSent(address,address,string)")],
     };
 
-    wssProvider.getLogs({ ...filter, fromBlock: 5585417 }).then((events) => {
+    wssProvider.getLogs({ ...filter, fromBlock: 5593216 }).then((events) => {
       setNumOfMsgs(events.length + 1);
     });
 
