@@ -32,7 +32,7 @@ export default function MessageContainer({ user }: { user: { name: string, avata
   const [newMessage, setNewMessage] = useState('');
 
 
-  const handleMessage = useSendMessage(currentUser.name, newMessage, user.name);
+  const handleMessage = useSendMessage(currentUser.address, newMessage, user.name);
 
 
   const handleSendMessage = async () => {

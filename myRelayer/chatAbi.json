@@ -187,9 +187,9 @@
     {
         "inputs": [
             {
-                "internalType": "string",
+                "internalType": "address",
                 "name": "_from",
-                "type": "string"
+                "type": "address"
             },
             {
                 "internalType": "string",
