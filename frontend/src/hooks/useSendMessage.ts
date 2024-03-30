@@ -31,7 +31,7 @@ const useSendMessage = (from: string, msg: string, to: string) => {
       const signature = await signer.signMessage(JSON.stringify(messageTx));
 
       const response = await fetch(
-        "https://ens-contract.onrender.com/forward-message",
+        "https://chatdapp-with-ens-ipfs-gasless.onrender.com/forward-message",
         {
           method: "POST",
           body: JSON.stringify({ ...messageTx, signature }),
