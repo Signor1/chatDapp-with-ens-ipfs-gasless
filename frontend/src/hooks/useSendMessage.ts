@@ -21,6 +21,10 @@ const useSendMessage = (from: string, msg: string, to: string) => {
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
+    const toastId = toast.loading("Sending...", {
+      position: "top-right",
+    });
+
     const messageTx = {
       from: from,
       msg: msg,
@@ -44,16 +48,19 @@ const useSendMessage = (from: string, msg: string, to: string) => {
       const jsonResponse = await response.json();
 
       if (jsonResponse.success) {
+        toast.dismiss(toastId);
         return toast.success(jsonResponse.message, {
           position: "top-right",
         });
       } else {
+        toast.dismiss(toastId);
         return toast.error(jsonResponse.message, {
           position: "top-right",
         });
       }
     } catch (error: any) {
-      // console.error("error: ", error);
+      toast.dismiss(toastId);
+
       toast.error("OOPS!! SOMETHING_WENT_WRONG", {
         position: "top-right",
       });
