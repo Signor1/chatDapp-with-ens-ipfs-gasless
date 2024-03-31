@@ -8,9 +8,8 @@ import { toast } from "react-toastify";
 import { isSupportedChain } from "@/util";
 import { getProvider } from "@/constants/provider";
 import { useNavigate } from "react-router-dom";
-import { getENSContract } from "@/constants/contract";
 
-const useCreateUser = (username: string, url: string) => {
+const useCreateUser = (address: any, url: string, username: string) => {
   const { chainId } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
 
@@ -25,35 +24,55 @@ const useCreateUser = (username: string, url: string) => {
     const readWriteProvider = getProvider(walletProvider);
     const signer = await readWriteProvider.getSigner();
 
-    const contract = getENSContract(signer);
+    const toastId = toast.loading("Registering...", {
+      position: "top-right",
+    });
+
+    const registrationTx = {
+      from: address,
+      avatar: url,
+      name: username,
+    };
 
     try {
-      const transaction = await contract.createAccount(url, username);
+      const signature = await signer.signMessage(
+        JSON.stringify(registrationTx)
+      );
 
-      console.log("transaction: ", transaction);
+      const response = await fetch(
+        "https://chatdapp-with-ens-ipfs-gasless.onrender.com/register-user",
+        {
+          method: "POST",
+          body: JSON.stringify({ ...registrationTx, signature }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
-      const receipt = await transaction.wait();
+      const jsonResponse = await response.json();
 
-      console.log("receipt: ", receipt);
-
-      if (receipt.status) {
+      if (jsonResponse.success) {
+        toast.dismiss(toastId);
         navigate("/chat");
-        return toast.success("user account created successfully !", {
+        return toast.success(jsonResponse.message, {
+          position: "top-right",
+        });
+      } else {
+        toast.dismiss(toastId);
+        navigate("/signup");
+        return toast.error(jsonResponse.message, {
           position: "top-right",
         });
       }
-
-      toast.error("account creation failed !", {
-        position: "top-right",
-      });
     } catch (error: any) {
-      // console.error("error: ", error);
+      toast.dismiss(toastId);
       navigate("/signup");
-      toast.error(`${error.message.slice(0, 20)}...`, {
+      toast.error("OOPS!! SOMETHING_WENT_WRONG", {
         position: "top-right",
       });
     }
-  }, [username, url, chainId, walletProvider, navigate]);
+  }, [username, url, address, chainId, walletProvider, navigate]);
 };
 
 export default useCreateUser;

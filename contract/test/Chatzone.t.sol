@@ -33,9 +33,9 @@ contract ENServiceTest is Test {
         assertEq(msgLengthBefore, 0);
 
         switchSigner(C);
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         switchSigner(D);
-        ensContract.createAccount("abcdefghijka", "ify.dev");
+        ensContract.createAccount(D, "abcdefghijka", "ify.dev");
 
         switchSigner(C);
         chatzoneContract.sendMessage(C, "hello Ify",  "ify.dev");
@@ -52,9 +52,9 @@ contract ENServiceTest is Test {
     function testingEventOnMsgSent() public {
 
         switchSigner(C);
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         switchSigner(D);
-        ensContract.createAccount("abcdefghijka", "ify.dev");
+        ensContract.createAccount(D, "abcdefghijka", "ify.dev");
 
         switchSigner(C);
 
@@ -68,9 +68,9 @@ contract ENServiceTest is Test {
 
     function testingGetMsgBtwTwoUsers() public {
         switchSigner(C);
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         switchSigner(D);
-        ensContract.createAccount("abcdefghijka", "ify.dev");
+        ensContract.createAccount(D, "abcdefghijka", "ify.dev");
 
         switchSigner(C);
         chatzoneContract.sendMessage(C, "hello Ify",  "ify.dev");

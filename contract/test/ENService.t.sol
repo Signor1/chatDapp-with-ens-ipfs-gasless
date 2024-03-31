@@ -29,11 +29,11 @@ contract ENServiceTest is Test {
         assertEq(userLengthBefore, 0);
 
         switchSigner(C);
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         switchSigner(D);
-        ensContract.createAccount("abcdefghijka", "ify.dev");
+        ensContract.createAccount(D, "abcdefghijka", "ify.dev");
         switchSigner(E);
-        ensContract.createAccount("zxcvbnmkjgaf", "phil.dev");
+        ensContract.createAccount(E, "zxcvbnmkjgaf", "phil.dev");
 
         uint userLengthAfter = ensContract.getAllUsers().length;
         assertEq(userLengthAfter, 3);
@@ -45,16 +45,16 @@ contract ENServiceTest is Test {
          vm.expectRevert(
             abi.encodeWithSelector(ENService.ZERO_ADDRESS_NOT_ALLOWED.selector)
         );
-        ensContract.createAccount("abcdefghijkabcdefghij", "pablo.dev");
+        ensContract.createAccount(ZERO_ADDRESS, "abcdefghijkabcdefghij", "pablo.dev");
     }
 
     function testingRevertIfUserExists() public {
         switchSigner(C);
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         vm.expectRevert(
             abi.encodeWithSelector(ENService.NAME_NOT_AVAILABLE.selector)
         );
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
     }
 
     function testingForEventOnAccountCreation() public {
@@ -63,14 +63,14 @@ contract ENServiceTest is Test {
         vm.expectEmit(address(ensContract));
         emit UserRegistered(C, "kels.dev");
 
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         
     }
 
     function testingForNameAndAddressMatching() public {
         switchSigner(C);
 
-        ensContract.createAccount("abcdefghijkabcdefghij", "kels.dev");
+        ensContract.createAccount(C, "abcdefghijkabcdefghij", "kels.dev");
         
         string memory _name = ensContract.getUserFromAddress(C).name;
 

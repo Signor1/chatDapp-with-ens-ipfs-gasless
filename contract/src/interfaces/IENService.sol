@@ -11,7 +11,7 @@ interface IENService{
 
     event UserRegistered(address indexed _address, string indexed name);
 
-function createAccount(string calldata avatar, string calldata name) external;
+function createAccount(address _from, string calldata avatar, string calldata name) external;
 
 function getUserFromAddress(address _address) external view returns (User memory);
 

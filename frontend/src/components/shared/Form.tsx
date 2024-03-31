@@ -4,8 +4,10 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import axios from "axios";
 import useCreateUser from "@/hooks/useCreateUser";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 export default function Form() {
+  const { address } = useWeb3ModalAccount();
 
   const [selectedFile, setSelectedFile] = useState();
 
@@ -48,7 +50,7 @@ export default function Form() {
 
   getImage()
 
-  const handleSubmit = useCreateUser(username, url);
+  const handleSubmit = useCreateUser(address, url, username);
 
   const handleClick = async () => {
     setIsLoading(true);

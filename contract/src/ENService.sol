@@ -20,24 +20,24 @@ contract ENService {
 
     User[] public users;
 
-    function createAccount(string calldata avatar, string calldata name) external {
-        if(msg.sender == address(0)) {
+    function createAccount(address _from, string calldata avatar, string calldata name) external {
+        if(_from == address(0)) {
             revert ZERO_ADDRESS_NOT_ALLOWED();
         }
         if(nameToAddress[name] != address(0)) {
             revert NAME_NOT_AVAILABLE();
         }
 
-        nameToAddress[name] = msg.sender;
+        nameToAddress[name] = _from;
 
-        User storage _newUserInfo = addressToUserInfo[msg.sender];
+        User storage _newUserInfo = addressToUserInfo[_from];
         _newUserInfo.avatar = avatar;
         _newUserInfo.name = name;
-        _newUserInfo.address_ = msg.sender;
+        _newUserInfo.address_ = _from;
 
         users.push(_newUserInfo);
 
-        emit UserRegistered(msg.sender, name);
+        emit UserRegistered(_from, name);
     }
 
     function getUserFromAddress(

@@ -10,6 +10,7 @@ Welcome to the Decentralized Chat DApp branded `Chatzone`! This project aims to 
 - [Decentralized Chat DApp](#decentralized-chat-dapp)
   - [Table of Contents](#table-of-contents)
   - [Overview](#overview)
+  - [Contract Addresses](#contract-addresses)
   - [Features](#features)
   - [Technologies Used](#technologies-used)
   - [Project Structure](#project-structure)
@@ -21,6 +22,11 @@ Welcome to the Decentralized Chat DApp branded `Chatzone`! This project aims to 
 ## Overview
 
 This project is a decentralized chat application built on Ethereum blockchain and IPFS. Users can securely communicate with each other using smart contracts for messaging and IPFS for profile image storage. Gasless transactions are facilitated through a custom relayer service.
+
+## Contract Addresses
+
+  - [ENS Contract Address](https://sepolia.etherscan.io/address/0x882f1e69cd5e2c5c172bf1ab8c9c192d8f581211)
+  - [Chat Contract Address](https://sepolia.etherscan.io/address/0xfbc211edebc6b2b7738fd934e265737b0750b4ee)
 
 ## Features
 
